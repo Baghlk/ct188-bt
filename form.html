@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Đăng Nhập</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+    .form-container {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Đăng Nhập</h2>
+  <form id="loginForm">
+    <label for="username">Tên đăng nhập:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+    
+    <label for="password">Mật khẩu:</label><br>
+    <input type="password" id="password" name="password" required><br>
+    <span id="passwordError" class="error"></span><br><br>
+    
+    <button type="submit">Đăng Nhập</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var password = document.getElementById('password').value;
+    var passwordError = document.getElementById('passwordError');
+    
+    var minLength = 8;
+    var specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
+
+    if (password.length < minLength) {
+      passwordError.textContent = "Mật khẩu phải có ít nhất " + minLength + " ký tự.";
+    } else if (!specialCharPattern.test(password)) {
+      passwordError.textContent = "Mật khẩu phải có ít nhất một ký tự đặc biệt.";
+    } else {
+      passwordError.textContent = ""; 
+      alert("Đăng nhập thành công!");
+    }
+  });
+</script>
+</body>
+</html>
